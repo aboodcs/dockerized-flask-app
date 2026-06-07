@@ -1,13 +1,13 @@
 # 🐳 Dockerized Flask App
 
-A simple Flask web application containerized with Docker.
+A simple Flask web application containerized with Docker and deployed via GitHub Actions CI/CD.
 
 ---
 
 ## 📥 Clone the Repository
 
 ```bash
-git clone https://github.com/aboodcs/dockerized-flask-app
+git clone https://github.com/aboodcs/dockerized-flask-app.git
 cd dockerized-flask-app
 ```
 
@@ -16,53 +16,70 @@ cd dockerized-flask-app
 ## 🔨 Build the Docker Image
 
 ```bash
-docker build --tag <image name> .
+docker build -t dockerized-flask-app .
 ```
-
-> The `.` at the end tells Docker to look for the `Dockerfile` in the current directory.
 
 ---
 
 ## 🚀 Run the Docker Container
 
 ```bash
-docker run -d -p 1337:80 <image name>
+docker run -d -p 1337:80 dockerized-flask-app
 ```
-
-| Flag | Meaning |
-|------|---------|
-| `-d` | Run in the background (detached mode) |
-| `-p 1337:80` | Map port **1337** on your machine → port **80** inside the container |
-| `<image name>` | The name of the image to run |
 
 ---
 
 ## 🌐 Access the Application
 
-**Option 1 — Browser:**
-
-Open your browser and go to:
+**Browser:**
 
 ```
 http://localhost:1337/
 ```
 
-**Option 2 — Terminal (curl):**
+**Terminal:**
 
 ```bash
-curl http://localhost:1337/
+curl http://localhost:1337
+```
+
+**Expected output:**
+
+```
+Hello GitHub!
 ```
 
 ---
 
-## 🛠️ Useful Commands
+## 🛠️ Useful Docker Commands
 
-```bash
-docker ps
+| Command | Description |
+|---|---|
+| `docker ps` | List running containers |
+| `docker ps -a` | List all containers |
+| `docker stop <id>` | Stop a running container |
+| `docker container prune` | Remove all stopped containers |
 
-docker ps -a
+---
 
-docker stop <container_id>
+## 📂 Project Structure
 
-docker container prune
 ```
+dockerized-flask-app/
+├── app.py
+├── requirements.txt
+├── Dockerfile
+├── README.md
+└── .github/
+    └── workflows/
+        └── docker-build-push.yml
+```
+
+---
+
+## ⚙️ CI/CD (GitHub Actions)
+
+This project uses **GitHub Actions** to automatically build and push the Docker image to Docker Hub.
+
+- ✅ Triggers on every push to `main`
+- ✅ Can also be triggered manually via `workflow_dispatch`
