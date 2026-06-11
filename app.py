@@ -3,7 +3,6 @@ import redis
 
 app = Flask(__name__)
 
-# connect to redis service from docker-compose
 r = redis.Redis(host="redis", port=6379, decode_responses=True)
 
 @app.route("/")
